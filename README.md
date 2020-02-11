@@ -16,5 +16,5 @@
 ###	npm install
 
 ## Run the Test Suite
-###	grunt --conf=-<feature.filename> --suite=Regression -suite=<Suite Name>
+###	grunt --conf=feature.filename --suite=Suite Name
 ###	grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
