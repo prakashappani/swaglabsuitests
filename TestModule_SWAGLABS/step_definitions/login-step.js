@@ -5,7 +5,7 @@ module.exports = function() {
 		console.log("Accessing the " + browser.params.env + " Environment");
 		loginPage.get(envData.login.url).then(function () {
 			console.log("URL :" + envData.login.url);
-			browser.sleep(5000).then(function () {
+			browser.sleep(1000).then(function () {
 				callback();
 			});
 		});
@@ -19,7 +19,7 @@ module.exports = function() {
 		helper.clearWebElement(loginPage.passWd());
 		helper.setDisplayValue(loginPage.passWd(), envData.login.password);
 		loginPage.signInButton().click().then(function () {
-			browser.sleep(3000).then(function () {
+			browser.sleep(1000).then(function () {
 				callback();
 
 			});
