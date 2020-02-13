@@ -24,7 +24,7 @@ module.exports = function() {
 
     this.When(/^I click on the shopping cart button$/, function (callback) {
         element(by.css('.shopping_cart_container')).click().then(function(){
-            browser.sleep(6000).then(function () {
+            browser.sleep(1000).then(function () {
                 callback();
             });
         });
