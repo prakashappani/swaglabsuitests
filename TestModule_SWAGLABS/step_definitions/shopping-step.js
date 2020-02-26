@@ -71,8 +71,6 @@ module.exports = function () {
     });
 
     this.Then(/^I click on continue shopping button$/, function (callback) {
-        // element(by.xpath('//a[@class=\'btn_secondary\']')).click()
-
         element(by.xpath('//a[@class=\'btn_secondary\']')).click().then(function () {
             browser.sleep(1000).then(function () {
                 callback();
