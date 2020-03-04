@@ -1,4 +1,4 @@
-var loginPage = function() {
+var loginPage = function () {
     var THIS = this;
     this.get = function (url) {
         return browser.get(url);
@@ -17,7 +17,6 @@ var loginPage = function() {
     };
 
 
-   
 }
 module.exports = new loginPage();
 

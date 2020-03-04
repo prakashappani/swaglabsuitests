@@ -32,3 +32,10 @@ Feature: Automation of SWAG LABS
     Given I'm on the Inventory container
     When I logout from the application
     Then I should go back to the login page
+
+  Scenario Outline: Verify user able to read from a csv file
+    Given I load the url
+    And I read from a <csv_file> file
+    Examples:
+      | csv_file                                     |
+      | TestModule_SWAGLABS/envData/user_details.csv |
