@@ -27,6 +27,30 @@ grunt --conf=feature.filename --suite=Suite Name
 grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
 ```
 
+## Sample code to read test data Data Table
+
+### Feature File
+```
+     Then I should verify "All Products" are in the shopping cart
+      | Products                 |
+      | Sauce Labs Onesie        |
+      | Sauce Labs Bike Light    |
+      | Sauce Labs Fleece Jacket |
+      
+```      
+### Step Defination
+        this.Then(/^I should verify "All Products" are in the shopping cart$/, function (table, callback) {
+        var list = element.all(by.css('.inventory_item_name'));
+        for (let i = 0; i < table.hashes().length; i++) {
+            let exp = table.rows()[i].toString()
+            list.get(i).getText().then(function (text) {
+                expect(text).to.equal(exp);
+            });
+        }
+        callback();
+    });
+    ```
+
 ## Sample code to read test data from CSV file
 
 ### Feature File
