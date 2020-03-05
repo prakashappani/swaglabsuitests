@@ -26,7 +26,33 @@ npm install
 grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
 ```
 
-## Sample code to read test data Data Table
+## Sample code to read data as Example
+### Steps under Scenario Outline will be executed for each line in the Examples
+
+### Feature File
+```
+  Scenario Outline: Verify user is able to add  ONE items to the cart using Examples
+    Given I'm on the Inventory container
+    When I Add the <Item1> to the cart
+    And I click on the shopping cart button
+    Then I should be able to see the items <Item1>  in the cart
+    And I click on continue shopping button
+    Examples:
+      | Item1             |
+      | Sauce Labs Onesie |
+```      
+### Step Defination
+    this.Then(/^I should be able to see the items (.*) in the cart$/, function (item1, callback) {
+        var list = element.all(by.css('.inventory_item_name'));
+        list.get(0).getText().then(function (text) {
+            expect(text).to.equal(item1.trim());
+            callback();
+        });
+    });
+
+    ```
+
+## Sample code to read test data from Data Table
 
 ### Feature File
 ```
@@ -64,6 +90,7 @@ grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
       
 ```      
 ### Step Defination
+```  
     this.Given(/^I read from a (.*) file$/, function (csvFile, callback) {
         helper.getCsvFormatData(csvFile).then(function (dataTable) {
             for (let i = 1; i < dataTable.length; i++) {
@@ -79,11 +106,10 @@ grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
                 });
             }
         });
-    });
-    ```
+    }); 
+```
 ### Helper Method in Page Objects 
-
-```   
+ 
         this.getCsvFormatData = function (fileName) {
         const filePath = './' + fileName;
         let fileContent;
