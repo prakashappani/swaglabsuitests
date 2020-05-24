@@ -41,6 +41,19 @@ module.exports = function () {
             }
         });
     });
+
+     this.When(/^I enter (.*) (.*) login page$/, function (username, password, callback) {
+        console.log("On the login page");
+        helper.clearWebElement(loginPage.userId());
+        helper.setDisplayValue(loginPage.userId(), username);
+        helper.clearWebElement(loginPage.passWd());
+        helper.setDisplayValue(loginPage.passWd(), password);
+        loginPage.signInButton().click().then(function () {
+            browser.sleep(1000).then(function () {
+                callback();
+            });
+        });
+    });
 };
 
 

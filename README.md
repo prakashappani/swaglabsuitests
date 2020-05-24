@@ -16,6 +16,18 @@ git clone "https://github.com/prakashappani/swaglabsuitests.git"
 cd swaglabsuitests
 ```	
 
+
+## Updating latest version of Chrome Driver 
+Locate ./package.json file
+Update "chromedriver:" version to your chrome version 
+Note: You will see the following error if the driver version mismatches
+"This version of ChromeDriver only supports Chrome version"
+```	
+"dependencies": {
+	"chromedriver": "^83.0",
+	"grunt-cli": "^1.2.0"
+}```
+
 ## Install node modules 
 ```	
 npm install
@@ -41,7 +53,7 @@ grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
       | Item1             |
       | Sauce Labs Onesie |
 ```      
-### Step Defination
+### Step Definition
     this.Then(/^I should be able to see the items (.*) in the cart$/, function (item1, callback) {
         var list = element.all(by.css('.inventory_item_name'));
         list.get(0).getText().then(function (text) {
@@ -63,7 +75,7 @@ grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
       | Sauce Labs Fleece Jacket |
       
 ```      
-### Step Defination
+### Step Definition
         this.Then(/^I should verify "All Products" are in the shopping cart$/, function (table, callback) {
         var list = element.all(by.css('.inventory_item_name'));
         for (let i = 0; i < table.hashes().length; i++) {
@@ -89,7 +101,7 @@ grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
       | TestModule_SWAGLABS/envData/user_details.csv |
       
 ```      
-### Step Defination
+### Step Definition
 ```  
     this.Given(/^I read from a (.*) file$/, function (csvFile, callback) {
         helper.getCsvFormatData(csvFile).then(function (dataTable) {
@@ -118,5 +130,41 @@ grunt --conf=./TestModule_SWAGLABS/Conf/protractor.conf.js --suite=Regression
             resolve(fileContent.split(/\r?\n/g));
         })
     };
+```
+
+## Sample code to use @tags in Examples: of Scenario Outline
+
+### Feature File
+```
+    Scenario Outline: Verify user able to read from a csv file
+
+    Given I load the url
+    When I enter <username> <password> login page
+    @positive
+        Examples:
+        |username       |password     |
+        |standard_user  |secret_sauce |
+        @nagative
+        Examples:
+        |username               |password     |
+        |locked_out_user        |secret_sauce |
+        |problem_user           |secret_sauce |
+```      
+### Step Definition
+```  
+        this.When(/^I enter (.*) (.*) login page$/, function (username, password, callback) {
+            console.log("On the login page");
+            helper.clearWebElement(loginPage.userId());
+            helper.setDisplayValue(loginPage.userId(), username);
+            helper.clearWebElement(loginPage.passWd());
+            helper.setDisplayValue(loginPage.passWd(), password);
+            loginPage.signInButton().click().then(function () {
+                browser.sleep(1000).then(function () {
+                    callback();
+                });
+            });
+        });
+```
+
 ```
 © 2020 GitHub, Inc.

@@ -39,3 +39,19 @@ Feature: Automation of SWAG LABS
     Examples:
       | csv_file                                     |
       | TestModule_SWAGLABS/envData/user_details.csv |
+
+
+  Scenario Outline: Verify user is able to login using tags in Examples:
+    Given I load the url
+    When I enter <username> <password> login page
+    @positive
+    Examples:
+    |username       |password     |
+    |standard_user  |secret_sauce |
+    @nagative
+    Examples:
+    |username               |password     |
+    |locked_out_user        |secret_sauce |
+    |problem_user           |secret_sauce |
+
+
