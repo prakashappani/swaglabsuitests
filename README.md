@@ -1,8 +1,18 @@
 # swaglabsuitests
 ## Setup Instructions to run Protractor UI Tests using Chrome
 
-## Download and install node
+## Download and install nvm & node
+```	
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+nvm install node
+or
+nvm install 8.11.3
+
+```	
+OR 
+## Download and install node manually
 ### Download & install Node  https://nodejs.org/en/download/  (install Node v8.11.3)
+
 
 ## Install Grunt Cli
 ```		
